@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="box">
+			div
+			<p class="a">p</p>
+		</div>
+		<script type="text/javascript">
+			/*
+			 * 克隆节点
+			 * 	节点.cloneNode(参数)
+			 * 	只克隆结构，不克隆自定义属性，绑的事件函数		 * 
+			 * 
+			 * 	参数：默认是false
+			 * 	false:
+			 	浅克隆，只克隆本身标签，行间属性
+			 *  true:
+			 * 	深克隆，还包括子内容和子标签
+			 * */
+			var box = document.getElementById('box');
+			box.index = 1;
+			box.onclick = function(){
+				
+			};
+			var cl = box.cloneNode(true);
+			console.log(cl.onclick)
+		</script>
+	</body>
+</html>

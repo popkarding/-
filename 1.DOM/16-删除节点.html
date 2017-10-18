@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<ul>
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+		</ul>
+		<script type="text/javascript">
+			/*
+			 	删除节点
+			 		父节点.removeChild(要删除的节点)
+			 * 		从父级下删除节点
+			 * 		返回删除的那个节点
+			 * */
+			var ul = document.getElementsByTagName('ul')[0];
+			var lis = ul.getElementsByTagName('li');
+			ul.removeChild(lis[0])
+			
+		</script>
+	</body>
+</html>

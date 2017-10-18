@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			#box div{
+				width: 100px;
+				height: 100px;
+				float: left;
+				margin-right:5px;
+			}
+	
+		</style>
+	</head>
+	<body>
+		<input type="button" value="按钮" id="btn"/>
+		<br />
+		<br />
+		<div id="box">
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+		</div>
+		
+		<script type="text/javascript">
+			var box = document.getElementById('box');
+			var divs = box.getElementsByTagName('div');
+			var d = Array.from(divs);
+			var btn = document.getElementById('btn');
+			var color = ['red','yellow','blue','green'];
+			for(var i=0;i<divs.length;i++){
+				divs[i].style.background = color[i];
+				divs[i].onclick = function(){
+					alert(this.style.backgroundColor)
+				}
+			}
+			btn.onclick = function(){
+//				color.sort(function(){
+//					return Math.random()-0.5;
+//				})
+//				var str = '';
+//				for(var i=0;i<color.length;i++){
+//					str+='<div style="background:'+color[i]+';"></div>';
+//				}
+//				box.innerHTML = str;
+				//已有节点相当于剪切，把4个div节点换下顺序，绑定的事件还在
+				d.sort(function(){
+					return Math.random()-0.5;
+				});
+				//console.log(d)
+				for(var i=0;i<d.length;i++){
+					box.appendChild(d[i])
+				}
+			}
+		</script>
+	</body>
+</html>

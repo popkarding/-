@@ -1,0 +1,33 @@
+s<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<ul>
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+		</ul>
+		<script type="text/javascript">
+			/*
+			 	替换节点
+			 * 	父级.replaceChild(要插入的节点,要被替换的节点)
+			 *  要插入的节点替换要被替换的节点
+			 * 如果要插入的是已有节点，相当于剪切
+			 * 返回：被替换的那个节点
+			 * 
+			 * */
+			var ul = document.getElementsByTagName('ul')[0];
+			var lis = ul.getElementsByTagName('li');
+			var li = document.createElement('li');
+			li.innerHTML = 4;
+			
+		//console.log(ul.replaceChild(li,lis[0]))
+		//console.log(ul.removeChild(lis[0]))
+		//console.log(ul.appendChild(li))
+		console.log(ul.replaceChild(lis[2],lis[0]))
+		</script>
+	</body>
+</html>

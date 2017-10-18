@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<ul id="list">
+			<li>
+				<span>文字1</span>
+			</li>
+			<li>
+				<span>文字2</span>
+			</li>
+			<li>
+				<span>文字3</span>
+			</li>
+			<li>
+				<span>文字4</span>
+			</li>
+			<li>
+				<span>文字5</span>
+			</li>
+		</ul>
+		<script type="text/javascript">
+			var list = document.getElementById('list');
+			var lis = list.children;
+			console.log(lis)
+			var spans = document.getElementsByTagName('span');
+			for(var i=0;i<spans.length;i++){
+				spans[i].onclick = function(){
+					//点击span，操作父级节点li变红
+					this.parentNode.style.background = 'red';
+				}
+			}
+			
+		</script>
+	</body>
+</html>

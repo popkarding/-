@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<ul>
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+		</ul>
+		<script type="text/javascript">
+			/*
+				插入节点
+					父节点.appendChild(要插入的节点)
+					向父节点的最后一位插入子节点
+					如果是已有节点，相当于剪切
+					返回新插入的那个节点
+			 * */
+			var div = document.createElement('div');
+			//创建好的div元素节点，就可以操作了，但是页面中还没有这个div元素
+			div.className = 'abc';
+			div.id = 'box';
+			div.index = 2;
+			div.innerHTML = '你好';
+			div.style.cssText = 'width:100px;height:100px;border: 1px solid #000;';
+			div.onclick = function(){
+				alert(1);
+			};
+			console.log(div);
+			//把新建的div插入到页面中某个元素下，页面中才有这个新建的div元素
+			document.body.appendChild(div);
+			var lis = document.getElementsByTagName('li');
+			var ul = document.getElementsByTagName('ul')[0];
+			//插入已有节点，相当于剪切
+			ul.appendChild(lis[0])
+			
+		</script>
+	</body>
+</html>

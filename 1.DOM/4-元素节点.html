@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div>
+			内容
+			<span></span>
+			<p>
+				<span></span>
+			</p>
+			<!--注释-->
+		</div>
+		<script type="text/javascript">
+			/*
+			 	元素节点
+			 		nodeType:1
+			 		nodeName:标签名大写
+			 		nodeValue:null
+	
+			 		firstChild:第一个子节点
+			 		lastChild:最后一个子节点
+			 		nextSibling:下一个兄弟节点
+			 		previousSibling:上一个兄弟节点
+			 		
+			 		childNodes:所有第一级子节点
+			 		children:所有第一级子元素节点
+			 		parentNode:父级节点
+			 		firstElementChild:第一个元素子节点
+			 		lastElementChild:最后一个元素子节点
+			 		nextElementSibling:下一个兄弟元素节点
+			 		previousElementSibling:上一个元素兄弟节点
+			 		
+			 		没有时是null
+			 * 
+			 * 
+			 * */
+			var div = document.getElementsByTagName('div')[0];
+//			console.log(div.nodeType)
+//			console.log(div.nodeName)
+//			console.log(div.nodeValue)
+//			console.log(div.childNodes)
+//			console.log(div.children)
+//			console.log(div.parentNode)
+//			console.log(div.firstChild)
+//			console.log(div.lastChild)
+//			console.log(div.nextSibling)
+//			console.log(div.previousSibling)
+			console.log(div.firstElementChild);
+			console.log(div.lastElementChild);
+			console.log(div.nextElementSibling);
+			console.log(div.previousElementSibling)
+			//console.log(document.body.childNodes)
+
+		</script>
+	</body>
+</html>

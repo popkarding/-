@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div class="abc" id="box"></div>
+		<script type="text/javascript">
+			/*
+			 	属性节点
+			 * 		nodeType:2
+			 *      nodeName:属性名小写
+			 * 		nodeValue:值
+			 * */
+			var div = document.getElementsByTagName('div')[0];
+			//为了方便操作，在div元素节点下，用属性名id,className存了对应属性节点，我们可以直接用.id,.className操作
+//			div.id
+//			div.className
+			console.log(div.attributes)
+			console.log(div.attributes[0].nodeType)
+			console.log(div.attributes[0].nodeName)
+			console.log(div.attributes[0].nodeValue)
+		</script>
+	</body>
+</html>

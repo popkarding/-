@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			ul{
+				margin: 0;
+				padding:0;
+				list-style: none;
+			}
+			li{
+				float: left;
+				width: 100px;
+				height: 30px;
+				border: 1px solid #000;
+				position: relative;
+			}
+			span{
+				display: block;
+				height:30px;
+				line-height: 30px;
+				text-align: center;
+			}
+			p{
+				margin: 0;
+			}
+			li div,li p{
+				position: absolute;
+				width: 100px;
+				height: 100px;
+				background: red;
+				bottom:-120px;
+				left:0;
+				display: none;
+			}
+		</style>
+	</head>
+	<body>
+		<ul>
+			<li>
+				<span>菜单1</span>
+				<p>p</p>
+			</li>
+			<li>
+				<span>菜单2</span>
+				
+			</li>
+			<li>
+				<span>菜单3</span>
+				<div>div</div>
+			</li>
+			<li>
+				<span>菜单4</span>
+				<p>p</p>
+			</li>
+			<li>
+				<span>菜单5</span>
+				<div>div</div>
+			</li>	
+		</ul>
+		<script type="text/javascript">
+			var spans = document.getElementsByTagName('span');
+			for(var i=0;i<spans.length;i++){
+				spans[i].onmouseover = function(){
+					//如果有下一个元素兄弟节点就显示，没有是null，不进if
+					if(this.nextElementSibling){
+						this.nextElementSibling.style.display = 'block';
+					}
+				}
+				spans[i].onmouseout = function(){
+					if(this.nextElementSibling){
+						this.nextElementSibling.style.display = '';
+					}
+				}
+			}
+		</script>
+	</body>
+</html>
