@@ -13,7 +13,8 @@
     4.新建节点，插入节点，删除节点，替换节点，克隆节点----file:1.DOM
     5.事件模型-----file：1.DOM
 ```
-## 二、webpack   
+## 二、作用域、作用域链、闭包、预解析
+## 三、webpack   
 顺着简书的文章梳理（我是知识的二道贩子）  http://www.jianshu.com/p/42e11515c10f
 1. webpack是基于node环境的
 2. 初始化  npm init 
