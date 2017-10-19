@@ -14,7 +14,7 @@
     5.事件模型-----file：1.DOM
 ```
 ## 二、webpack   
-顺着简书的文章梳理（http://www.jianshu.com/p/42e11515c10f）[我是二道贩子]
+顺着简书的文章梳理（我是知识的二道贩子）  http://www.jianshu.com/p/42e11515c10f
 1. webpack是基于node环境的
 2. 初始化  npm init 
 3. 安装  webpack  npm install --save-dev webpack
