@@ -163,6 +163,7 @@ module.exports = {
 ```
 
 ## 四、generator
+关键点：分清generator和iterator | iterator对象的值 | iterator传参 | 执行过程  | 理解无回调的**异步**流程控制
 1.function后面带*的函数是generator函数
 ```
 function* genFunc () {
@@ -187,6 +188,7 @@ console.log(ret.value) // 1
 console.log(ret.done) // false
 ```
 **注意：函数执行完之后，再调用 next 方法会产生异常。**
+
 可以看到，只输出了 'step 1'。这意味着直到你运行下一次 next() 之前，generator内部的状态处于暂停之中，但是却不影响generator外部的代码继续运行。
 4.直到generator函数内部不再有 yield 语句存在了，这时你再调用 next()，获得的就会是该函数的常规返回值 (return 的值)：
 ```
@@ -208,6 +210,7 @@ setTimeout(function () {
 }, 1000)
 ```
 **注意：不要把iterator传参和generator传参搞混了**
+
 6.很有意思的一个例子  斐波那契数列
 ```
 function* fab(max) {
