@@ -163,7 +163,7 @@ module.exports = {
 ```
 
 ## 四、generator
-关键点：分清generator和iterator | iterator对象的值 | iterator传参 | 执行过程  | 理解无回调的**异步**流程控制
+关键点：分清generator和iterator | iterator对象的值 | iterator的.next()方法传参 | 执行过程  | 理解无回调的**异步**流程控制
 1.function后面带*的函数是generator函数
 ```
 function* genFunc () {
