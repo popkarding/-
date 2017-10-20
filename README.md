@@ -162,7 +162,7 @@ module.exports = {
 };
 ```
 
-##四、generator
+## 四、generator
 1.function后面带*的函数是generator函数
 ```
 function* genFunc () {
