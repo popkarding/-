@@ -98,31 +98,53 @@ module: {
         ]
     }
 ```
-babel-loader
+11.babel-loader
 ```
 
 ```
-CSSloader
+**注意分割babel配置和webpack配置时候要创建的.babelrc文件在windows环境下会有 文件需要名字的问题 用webstrom可以搞定**
+12.CSSloader
 ```
 
 ```
+**注意**module中的test后面跟的字段没有引号
 
 **注意：Loaders和Plugins常常被弄混，但是他们其实是完全不同的东西，可以这么来说，loaders是在打包构建过程中用来处理源文件的（JSX，Scss，Less..），一次处理一个，插件并不直接操作单个文件，它直接对整个构建过程其作用。**
 
-##plugins
+13.plugins  --->有些是webpack内置的  有些要安装
 
 Hot Module Replacement（HMR）【热加载】
 >1.在webpack配置文件中添加HMR插件；
 2.在Webpack Dev Server中添加“hot”参数；
+```
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');  // npm install --save-dev ....
+module.exports = {
+...
+devServe:{
+    contentBase: "./public",//本地服务器所加载的页面所在的目录（我理解的是监听这里的文件？）
+    historyApiFallback: true,//不跳转
+    hot:true;  //热加载
+    inline: true//实时刷新
+}
 
-**注意**module中的test后面跟的字段没有引号
+plugins:[
+        new webpack.BannerPlugin('版权所有，翻版必究'),   //注意都是new出来的    
+        new HtmlWebpackPlugin({
+            template: __dirname + "/app/index.tmpl.html"}),
+        new webpack.HotModuleReplacementPlugin()//热加载插件  
+    ]
+}
+```
 
 
 
 
-关于**开发环境的webpack.config.js和生产环境的webpack.production.config.js文件之间的区别**感觉主要在插件部分，生产环境会进行 压缩 分离js和css 还有给模块分配id
+14.生产环境
 
-设置build后npm run build提示错误：NODE_ENV不是内部或外部命令，也不是可运行的程序
+关于**开发环境的webpack.config.js和生产环境的webpack.production.config.js文件之间的区别**感觉主要在插件部分，生产环境会安装进行 压缩 分离js和css 还有给模块分配id的plugins
+
+json文件设置build后npm run build提示错误：NODE_ENV不是内部或外部命令，也不是可运行的程序
 或批处理文件。
 解决：
 >"build": "set NODE_ENV=production && webpack -p --progress --profile --colors"
