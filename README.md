@@ -40,7 +40,7 @@ module.exports = {
 }
 ```
 
-9.配置devServer来实现热加载
+9.配置devServer
 ```
 module.exports = {
   devtool: 'eval-source-map',
@@ -54,7 +54,7 @@ module.exports = {
   devServer: {
     contentBase: "./public",//本地服务器所加载的页面所在的目录（我理解的是监听这里的文件？）
     historyApiFallback: true,//不跳转
-    inline: true//实时刷新(热加载)
+    inline: true//实时刷新
   } 
 }
 ```
@@ -98,4 +98,112 @@ module: {
         ]
     }
 ```
+babel-loader
+```
 
+```
+CSSloader
+```
+
+```
+
+**注意：Loaders和Plugins常常被弄混，但是他们其实是完全不同的东西，可以这么来说，loaders是在打包构建过程中用来处理源文件的（JSX，Scss，Less..），一次处理一个，插件并不直接操作单个文件，它直接对整个构建过程其作用。**
+
+##plugins
+
+Hot Module Replacement（HMR）【热加载】
+>1.在webpack配置文件中添加HMR插件；
+2.在Webpack Dev Server中添加“hot”参数；
+
+**注意**module中的test后面跟的字段没有引号
+
+
+
+
+关于**开发环境的webpack.config.js和生产环境的webpack.production.config.js文件之间的区别**感觉主要在插件部分，生产环境会进行 压缩 分离js和css 还有给模块分配id
+
+设置build后npm run build提示错误：NODE_ENV不是内部或外部命令，也不是可运行的程序
+或批处理文件。
+解决：
+>"build": "set NODE_ENV=production && webpack -p --progress --profile --colors"
+
+
+缓存有点云里雾里的，不知道具体其什么作用
+```
+module.exports = {
+..
+    output: {
+        path: __dirname + "/build",
+        filename: "bundle-[hash].js" //bundle--->bundle-[hash].js
+    },
+   ...
+};
+```
+
+##四、generator
+1.function后面带*的函数是generator函数
+```
+function* genFunc () {
+    console.log('step 1')
+    yield 1
+    console.log('step 2')
+    yield 2
+    console.log('step 3')
+    return 3
+}
+```
+2.调用generator时，会获得一个iterator对象
+```
+var gen = genFunc()
+console.log(gen)  
+```
+3.这个对象有个方法叫next(),每当你调用 next() 的时候，generator函数内部就会执行直到遇到下一个 yield 语句，然后暂停在那里，并返回一个对象。这个对象含有被 yield 的值和generator函数的运行状态。
+```
+var ret = gen.next() // 输出: 'step 1'
+ret   //Object {value: [yield的值] ,done:[true/false], }
+console.log(ret.value) // 1
+console.log(ret.done) // false
+```
+**注意：函数执行完之后，再调用 next 方法会产生异常。**
+可以看到，只输出了 'step 1'。这意味着直到你运行下一次 next() 之前，generator内部的状态处于暂停之中，但是却不影响generator外部的代码继续运行。
+4.直到generator函数内部不再有 yield 语句存在了，这时你再调用 next()，获得的就会是该函数的常规返回值 (return 的值)：
+```
+ret = gen.next() // 输出 'step 3'
+console.log(ret.value) // 3
+console.log(ret.done) // true
+```
+5.同时，iterator对象的 next() 方法是可以传递一个参数的。这个参数将会成为generator函数内对应 yield 语句的返回值：
+```
+function* genFunc () {
+    var result = yield 1
+    console.log(result)
+}
+var gen = genFunc()
+gen.next() // 此时generator内部执行到 yield 1 并暂停，但还未对result赋值！
+// 即使异步也可以！
+setTimeout(function () {
+    gen.next(123) // 给result赋值并继续执行，输出: 123
+}, 1000)
+```
+**注意：不要把iterator传参和generator传参搞混了**
+6.很有意思的一个例子  斐波那契数列
+```
+function* fab(max) {
+    var count = 0, last = 0, current = 1;
+
+    while(max > count++) {
+        yield current;
+        var tmp = current;
+        current += last;
+        last = tmp;
+    }
+}
+
+var o = fab(10), ret, result = [];
+
+while(!(ret = o.next()).done) {
+    result.push(ret.value);
+}
+
+console.log(result); // [1, 1, 2, 3, 5, 8, 13, 21, 34, 55]
+```
