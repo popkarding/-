@@ -232,3 +232,141 @@ while(!(ret = o.next()).done) {
 
 console.log(result); // [1, 1, 2, 3, 5, 8, 13, 21, 34, 55]
 ```
+##面向对象
+1.参考阮大师的面向对象的文章[http://www.ruanyifeng.com/blog/2010/05/object-oriented_javascript_encapsulation.html]
+
+封装  
+```
+
+function Cat(name,color){
+　　　　this.name = name;
+　　　　this.color = color;
+　　}
+　　Cat.prototype.type = "猫科动物";
+　　Cat.prototype.eat = function(){alert("吃老鼠")};
+　　
+//使用new操作符 生成实例化对象
+　　var cat1 = new Cat("大毛","黄色");
+　　var cat2 = new Cat("二毛","黑色");
+　　alert(cat1.type); // 猫科动物
+　　cat1.eat(); // 吃老鼠
+```
+**验证方法：**
+```
+//isPrototypeOf():这个方法用来判断，某个proptotype对象和某个实例之间的关系。
+    alert(Cat.prototype.isPrototypeOf(cat1)); //true
+　　alert(Cat.prototype.isPrototypeOf(cat2)); //true
+
+//hasOwnProperty():每个实例对象都有一个hasOwnProperty()方法，用来判断某一个属性到底是本地属性，还是继承自prototype对象的属性。
+    alert(cat1.hasOwnProperty("name")); // true
+　　alert(cat1.hasOwnProperty("type")); // false
+
+//in操作符:in运算符可以用来判断，某个实例是否含有某个属性，[不管是不是本地属性]
+    alert("name" in cat1); // true
+　　alert("type" in cat1); // true
+　　
+　　//in用来遍历属性  （注意alert后面的写法）
+　　for(var prop in cat1) {alert("cat1["+prop+"]="+cat1[prop]); }
+
+```
+
+继承
+```
+//原型继承
+function extend(Child, Parent) {
+
+　　　　var F = function(){};
+　　　　F.prototype = Parent.prototype;
+　　　　Child.prototype = new F();
+　　　　Child.prototype.constructor = Child;
+　　　　Child.uber = Parent.prototype;
+　　}
+```
+**Child.uber = Parent.prototype;**意思是为子对象设一个uber属性，这个属性直接指向父对象的prototype属性
+```
+//拷贝继承
+function extend2(Child, Parent) {
+　　　　var p = Parent.prototype;
+　　　　var c = Child.prototype;
+　　　　for (var i in p) {
+　　　　　　c[i] = p[i];
+　　　　　　}
+　　　　c.uber = p;
+　　}
+```
+由非构造函数的继承引申出来的深浅拷贝(原因无法使用拷贝继承和原型继承)【JQuery库使用的继承方法】
+
+```
+    var Chinese = {
+　　　　nation:'中国'
+　　};
+　　var Doctor ={
+　　　　career:'医生'
+　　}
+　　//现在要生成一个"中国医生"的对象了
+　　
+    //浅拷贝  p:parent  c:child
+    funciton extendCopy(p){
+        var c = {};
+        for(var i in p){
+            c[i] = p[i];
+        }
+        c.uber = p;
+        return c
+    }
+    
+    var Doctor = extendCopy(chinese);
+    Doctor.career = "医生"
+    alert(Doctor.nation) //中国
+    
+    //深拷贝
+    function deepCopy(p,c){   //参数写成 (p,c)原因是使用时
+        var c = c || {};   //c有值则为 c undefine的话为 {}
+        for(var i in p){
+            if(typeof p[i] === 'object'){  //对象内有子对象时
+                c[i] = (p[i].constructor === Array)?[]:{}; //注意这个判断方式
+                deepCopy(p[i],c[i]);   //递归
+            }else{
+                c[i] = p[i];
+            }
+        }
+        
+        return c
+    }
+    
+    var Doctor =  deepCopy(chinese)  //使用时 参数直传parent
+    chinese.birthday = ['bj','sh','hz'];
+    Doctor.birthday.push('xm');
+    
+    alert(Doctor.birthPlaces); //['bj','sh','hz','xm'];
+　　alert(Chinese.birthPlaces); //['bj','sh','hz'];
+    
+    
+    //简单粗暴深拷贝之JSON解决方法（来自知乎）有局限性：
+    局限性：1.无法复制函数 2.原型链没了，对象就是object，所属的类没了。(what??)
+    var test ={
+	  	name:{
+	  	 xing:{ 
+	  	     first:'张',
+	  	     second:'李'
+	  	},
+	  	ming:'老头'
+	  },
+	  age :40,
+	  friend :['隔壁老王','宋经纪','同事']
+	 }
+	  var result = JSON.parse(JSON.stringify(test))  //核心
+	  result.age = 30
+	  result.name.xing.first = '往'
+	  result.friend.push('fdagldf;ghad')
+	  console.dir(test)
+	  console.dir(result)
+```
+2.blog三张图搞懂JavaScript的原型对象与原型链:[http://www.cnblogs.com/shuiyi/p/5305435.html]
+
+
+
+引申：**typeof** | **instanceof** | **Object.prototype.toString.call(...)**
+>1.  typeof---->number、boolean、string、object、undefined、function       ||不能分辨Object, 对简单类型可以区分
+2.  instanceof本意是用来判断 A 是否为 B 的实例对象表达式为：A instanceof B，如果A是B的实例，则返回true,否则返回false 所以{}和[]在instanceof Object时都为true无法区分
+3.  Object.prototype.toString.call(...) ---->  [object ...]   超级好用，就是它了（哇哈哈）
