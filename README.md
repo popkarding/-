@@ -235,7 +235,7 @@ console.log(result); // [1, 1, 2, 3, 5, 8, 13, 21, 34, 55]
 ## 五、面向对象
 1.参考阮大师的面向对象的文章[http://www.ruanyifeng.com/blog/2010/05/object-oriented_javascript_encapsulation.html]
 
-封装  
+**封装**
 ```
 
 function Cat(name,color){
@@ -270,7 +270,7 @@ function Cat(name,color){
 
 ```
 
-继承
+**继承**
 ```
 //原型继承
 function extend(Child, Parent) {
@@ -367,6 +367,8 @@ function extend2(Child, Parent) {
 
 
 引申：**typeof** | **instanceof** | **Object.prototype.toString.call(...)**
->1.  typeof---->number、boolean、string、object、undefined、function       ||不能分辨Object, 对简单类型可以区分
+```
+1.  typeof---->number、boolean、string、object、undefined、function      ||不能分辨Object, 对简单类型可以区分
 2.  instanceof本意是用来判断 A 是否为 B 的实例对象表达式为：A instanceof B，如果A是B的实例，则返回true,否则返回false 所以{}和[]在instanceof Object时都为true无法区分
 3.  Object.prototype.toString.call(...) ---->  [object ...]   超级好用，就是它了（哇哈哈）
+```
