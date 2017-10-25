@@ -232,7 +232,7 @@ while(!(ret = o.next()).done) {
 
 console.log(result); // [1, 1, 2, 3, 5, 8, 13, 21, 34, 55]
 ```
-##面向对象
+## 五、面向对象
 1.参考阮大师的面向对象的文章[http://www.ruanyifeng.com/blog/2010/05/object-oriented_javascript_encapsulation.html]
 
 封装  
