@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>miao</title>
+</head>
+<body>
+<script type="text/javascript">
+
+    比较下面两种写法  有点意思
+
+      Array.prototype.unique = function(){  //  注意这里的写法  把方法绑到构造数组函数的原型上   
+      var res = [];
+      var json = {};
+      for(var i=0,i<this.length.i++){
+        if(!json[this[i]]){
+          res.push(this[i]);
+          json[this[i]] = 1;
+        }
+      }
+      return res
+      }
+      
+      var arr = [112,112,32,'你好'，112,113]
+      alert(arr.unique());   
+      
+      
+      
+      //-------------------------------------------------------------------
+      
+      
+      
+      function unique(arr){     //传参工具函数写法
+        var res = [];
+        var json = {};
+        for(var i=0,i<arr.length.i++){
+          if(!json[arr[i]]){
+            res.push(arr[i]);
+            json[arr[i]] = 1;   //随便赋简单值即可
+          }
+        }
+        return res
+      }
+      var arr = [112,112,32,'你好'，112,113]
+      alert(unique(arr))
+      
+</script>
